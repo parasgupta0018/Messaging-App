@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" style="background-color: transparent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.css" />
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--sweet alert-->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
+
+    <title>messagingclone</title>
+
+</head>
+
+<body>
+    <div class="header" style="width: 100% !important;position: static !important;">
+        <img class="chats-img" style="border:none;" src="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" />
+        <div class="header-sender-name m-auto center-align" style="text-transform:capitalize;font-weight: bold;">BAATCHEET</div>
+        <div class="dots" id="dots">
+            <div class="dot ml-auto"><img src="../images/download1.png" class="dot-image" /></div>
+            <div class="menu">
+                <div class="menu-text"><a href="/chat">Home</a></div>
+                <div class="menu-text"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron m-0 mt-1 bg-light row">
+        <div class="row card-deck " style="width: 100%;">
+            <div class="card col-4" style="width:750px">
+                <% if(user.imgURL){ %>
+                    <img class="card-img-top" src="<%= user.imgURL %>" alt="Card image" style="height: 49vh !important;">
+                    <% }else{ %>
+                        <img class="card-img-top" src="../images/img_avatar1.png" alt="Card image" style="height: 49vh !important;">
+                        <%}%>
+                            <div class="card-body">
+                                <h4 class="card-title" style="text-transform: capitalize;">
+                                    <%=user.firstname +" "+ user.lastname%>
+                                </h4>
+                                <p class="card-text">
+                                    <%= user.phone %>
+                                </p>
+                                <div class="row">
+                                    <div class="col-6" style="padding: 0px !important;">
+                                        <form style="border: none; padding: 2px !important;" class="form-control" action="/profilepic" enctype="multipart/form-data" method="POST" id="profileform">
+                                            <input type="file" name="user-image" id="img-upload" style="display:none" />
+                                            <label for="img-upload" class="custom-file-upload" style="width: 100%;">
+                                                <a class="btn btn-primary" style="width:100%;padding: 6px;margin: 0px !important;font-weight: bold;">Change profile pic</a>
+                                            </label>
+                                        </form>
+                                    </div>
+                                    <div class="col-6" style="padding: 2px !important;">
+                                        <form style="border: none; padding: 0px !important;" class="form-control" action="/Removepic" method="POST" id="rempicform">
+                                            <input style="padding: 6px; width: 100%;margin: 0px !important;font-weight: bold;" type="submit" class="btn btn-danger" value="Remove profile pic">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+
+            <div class="card col-8">
+                <div class="card-body">
+                    <div id="pwd" class="card-panel" style="margin-top:0px">
+                        <form action="/updatepwd" id="pwd_update" method="POST">
+                            <div class="card-header" style="margin-bottom: 60px;">
+                                <h2 class="text-center font-up font-bold">UPDATE PASSWORD</h2>
+                            </div>
+                            <div class="md-form row">
+                                <div class="input-field col-11">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="cpassword" type="password" name="cpassword" class="validate" required oninvalid="this.setCustomValidity('This field is required')" oninput="this.setCustomValidity('')">
+                                    <label for="cpassword">Current Password</label>
+                                </div>
+                                <div class="col-1">
+                                    <i class="material-icons prefix" id="hide_pwc" style="color:black; cursor:pointer; font-size:24px" onclick="TogglecShowPassword(event)">remove_red_eye</i>
+                                </div>
+                            </div>
+                            <div class="md-form row">
+                                <div class="input-field col-11">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="npassword" type="password" name="npassword" class="validate" required oninvalid="this.setCustomValidity('This field is required')" oninput="this.setCustomValidity('')">
+                                    <label for="npassword">New Password</label>
+                                </div>
+                                <div class="col-1">
+                                    <i class="material-icons prefix" id="hide_pwn" style="color:black; cursor:pointer; font-size:24px" onclick="TogglenShowPassword(event)">remove_red_eye</i>
+                                </div>
+                            </div>
+
+                            <div class="center row">
+                                <button class="btn btn-danger col-sm-3 mt-5" id="cancel">CANCEL</button>
+                                <input type="submit" name="updt_pwd" value="UPDATE PASSWORD" class="col-sm-8 btn mt-5 btn-success container" id="change_pwd_btn" />
+                            </div>
+                        </form>
+                    </div>
+                    <div id="info" class="card-panel" style="margin-top:0px">
+                        <form action="/updateinfo" method="POST" id="profile_update">
+                            <div class="card-header row">
+                                <h2 class="text-center col-11 font-up font-bold">PROFILE INFORMATION</h2>
+
+                                <a id="info_update" style="color: black;" class="col-1 waves-effect waves-circle waves-light btn-floating secondary-content">
+                                    <i class="material-icons" style="font-size: 37px !important;">edit</i>
+                                </a>
+                            </div>
+                            <div class="md-form row">
+                                <div class="col-6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="first_name" name="firstname" disabled value="<%= user.firstname %>" type="text" class="updatef validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="col-6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="last_name" name="lastname" disabled value="<%= user.lastname %>" type="text" class="updatef validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')">
+                                    <label for="last_name">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="md-form">
+                                <i class="material-icons prefix">email</i>
+                                <input id="emailId" style="text-transform: none !important;" disabled value="<%= user.email%>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required type="email" name="email" class="validate updatef" required oninvalid="this.setCustomValidity('This field is required to Sign Up')"
+                                    oninput="this.setCustomValidity('')">
+                                <label style="margin-left: 2.5rem !important;" for="emailId">Email</label>
+                            </div>
+                            <div class="md-form">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="phone" type="number" disabled value="<%= user.phone %>" name="phone" maxlength="10" class="validate updatef" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" oninput="this.setCustomValidity('')"
+                                    required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')">
+                                <label style="margin-left: 2.5rem !important;" for="phone">Phone Number</label>
+                            </div>
+                            <div class="mt-4 ml-5" style="color: blue">
+                                <a id="change_pwd" style="cursor:pointer">Change Password</a>
+                            </div>
+                            <div class="center">
+                                <input type="submit" name="updt_info" disabled value="UPDATE" class="btn mt-5 btn-success container updatef" id="update_btn" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/javascrpt.js">
+    </script>
+    <script src="../js/materialize.js"></script>
+
+    <script type="text/javascript">
+        $('#img-upload').value = null;
+        var img_upload = document.getElementById('img-upload');
+        img_upload.addEventListener('change', function(e) {
+            var form = document.getElementById('profileform');
+            console.log('aaya')
+            form.submit();
+        })
+
+        var img = "<%= img_err %>";
+        if (img) {
+            Swal.fire({
+                title: 'Error!',
+                text: img,
+                icon: 'error'
+            });
+        }
+
+        document.getElementById('dots').addEventListener('click', openOptions);
+
+        function openOptions(event) {
+            var dot = event.target;
+            var dots = dot.parentElement.parentElement;
+            var menu = dots.lastElementChild;
+            $(document).ready(function() {
+
+                $(menu).slideToggle();
+                $('body').click(function(event) {
+                    if (!$(event.target).is(dot)) {
+                        $(menu).hide();
+                    }
+                });
+
+            });
+
+        }
+
+        $('#rempicform').submit(function(e) {
+            e.preventDefault();
+            var form = document.getElementById('rempicform')
+            Swal.fire({
+                title: 'Are you sure ?',
+                text: "your profile pic will be removed!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'REMOVE'
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+        });
+
+        var updt = document.getElementsByClassName('updatef');
+        $('#info_update').click(function() {
+            for (var i = 0; i < updt.length; i++) {
+                if (updt[i].disabled == true) {
+                    updt[i].disabled = false;
+                    document.getElementById('info_update').style.color = "blue";
+                } else if (updt[i].disabled == false) {
+                    updt[i].disabled = true;
+                    document.getElementById('info_update').style.color = "black";
+                }
+            }
+        });
+        //password error alert
+        var pwd = "<%= pwd %>";
+        console.log(pwd);
+        if (pwd) {
+            //$('#info').hide();
+            Swal.fire({
+                title: 'Error!',
+                text: pwd,
+                icon: 'error'
+            });
+            //$('#pwd').show();
+            //$('#info').hide();
+        }
+
+        //sweetalert
+        $('#profile_update').submit(function(e) {
+            e.preventDefault();
+            var form = document.getElementById('profile_update');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Your info will be updated",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'UPDATE'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        title: 'Updated!',
+                        text: 'Your info has been updated.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                    });
+                    setTimeout(function() {
+                        form.submit();
+                    }, 3000);
+                }
+            })
+        });
+        $('#pwd_update').submit(function(e) {
+            e.preventDefault();
+            var form = document.getElementById('pwd_update')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "your password will be changed!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'CHANGE'
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+        });
+
+        $(document).ready(function() {
+                $('#pwd').hide();
+            })
+            //$('#pwd').hide();
+        $(document).ready(function() {
+
+            $('#change_pwd').click(function() {
+                $('#info').hide();
+                $('#pwd').show();
+            });
+        });
+        $(document).ready(function() {
+            $('#cancel').click(function() {
+                $('#pwd').hide();
+                $('#info').show();
+            });
+        });
+
+        function TogglecShowPassword(ev) {
+            var y = ev.target;
+            var x = document.getElementById("cpassword");
+            if (x.type === "password") {
+                x.type = "text";
+                y.style.color = "rgba(0, 150, 136, 0.7)";
+            } else {
+                x.type = "password";
+                y.style.color = "black";
+            }
+        }
+
+        function TogglenShowPassword(ev) {
+            var y = ev.target;
+            var x = document.getElementById("npassword");
+            if (x.type === "password") {
+                x.type = "text";
+                y.style.color = "rgba(0, 150, 136, 0.7)";
+            } else {
+                x.type = "password";
+                y.style.color = "black";
+            }
+        }
+        $(document).ready(function() {
+
+            $image_crop = $('#image_demo').croppie({
+                enableExif: true,
+                viewport: {
+                    width: 220,
+                    height: 220,
+                    type: 'circle'
+                },
+                boundary: {
+                    width: 400,
+                    height: 400
+                }
+            });
+
+            $('#img-upload').on('change', function() {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    $image_crop.croppie('bind', {
+                        url: event.target.result
+                    }).then(function() {
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(this.files[0]);
+                $('#uploadimageModal').modal('open');
+                cropping();
+            });
+
+            $('.crop_image').click(function(event) {
+                $image_crop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function(response) {
+                    $.ajax({
+                        url: "account.php",
+                        type: "POST",
+                        data: {
+                            image: response
+                        },
+                        success: function(data) {
+                            $('#uploadimageModal').modal('close');
+                            console.log(data);
+                            location.reload();
+                            //$('#uploaded_image').html(data);
+                        }
+                    });
+                })
+            });
+
+        });
+
+        function cropping() {
+            var maxHeight = 0;
+            if (($('#uploadimageModal').height()) > ($('#modal_cont').height())) {
+                maxHeight = $('#uploadimageModal').height();
+            } else {
+                maxHeight = $('#modal_cont').height();
+            }
+            $('#uploadimageModal').height(maxHeight + 20);
+            $('#modal_cont').height(maxHeight + 20);
+            var maxWidth = 0;
+            maxWidth = $('#uploadimageModal').width();
+            maxWidth = (0.93 * maxWidth);
+            boundHeight = (0.7 * $('#uploadimageModal').height());
+            $('#bound').width(maxWidth);
+            $('#cropimg').width(maxWidth);
+            $('#slider').width(maxWidth);
+            $('#bound').height(boundHeight);
+            $('#cropimg').height(maxHeight);
+        }
+
+        $(window).resize(function() {
+            if (($('#uploadimageModal').height()) > ($('#modal_cont').height())) {
+                maxHeight = $('#uploadimageModal').height();
+            } else {
+                maxHeight = $('#modal_cont').height();
+            }
+            //maxHeight = 1.1 * maxHeight;
+            $('#uploadimageModal').height(maxHeight);
+            $('#modal_cont').height(maxHeight);
+
+
+            maxWidth = $('#uploadimageModal').width();
+            maxWidth = (0.93 * maxWidth);
+            boundHeight = (0.7 * $('#uploadimageModal').height());
+            $('#bound').width(maxWidth);
+            $('#slider').width(maxWidth);
+            $('#bound').height(boundHeight);
+            //console.log(maxWidth,'w');
+        });
+    </script>
+</body>
+
+</html>

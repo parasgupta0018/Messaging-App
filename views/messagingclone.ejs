@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" style="background-color: transparent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.css" />
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>messagingclone</title>
+
+</head>
+
+<body>
+    <div class="whole row">
+        <!--this is done to test the changes-->
+        <div class="contain col-xl-4 col-lg-4 col-md-6 col-sm-7 col-12">
+            <div class="contacts hver" style="height: 7vh;padding: 9px !important;background-color: green;">
+                <form action="/searchcontact" style="width: 100%;">
+                    <div class="form-group has-search" style="width: 102%;">
+                        <span class="fa fa-search-plus form-control-feedback" style="color: green;"></span>
+                        <input autocomplete="off" type="number" name="search" maxlength="10" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" class="form-control" placeholder="Add a contact(number)" oninput="this.setCustomValidity('')"
+                        />
+                    </div>
+                </form>
+            </div>
+            <% if(typeof ucontacts != 'undefined'){ %>
+                <% ucontacts.forEach(function(contact) { %>
+                    <div class="contacts hver" onclick="{changeChatBox(this);changeRoom('<%= user._id %>','<%= contact._id %>')};">
+                        <img src="../images/face6.PNG" />
+                        <div class="hidden-userid">
+                            <%= contact._id %>
+                        </div>
+                        <div class="hidden">
+                            <%= contact.phone %>
+                        </div>
+
+                        <% if(typeof chats != 'undefined'){ %>
+                            <% chats.forEach(function(chat) { %>
+                                <% if(chat.members.includes(contact._id)){ %>
+                                    <%if(chat.messages != ''){%>
+                                        <div class="content">
+                                            <div class="combine row" style="max-width: 26vw;">
+                                                <div class="sender col-7">
+                                                    <%= contact.firstname + ' ' + contact.lastname %>
+                                                </div>
+                                                <div class="date col-5">
+                                                    <% if(moment().format('LL') == moment(chat.messages.slice(-1)[0].created_at).format('LL')){ %>
+                                                        <%= moment(chat.messages.slice(-1)[0].created_at).format('hh:mm a') %>
+                                                            <%}else if(moment().subtract(1, 'days').format('LL') == moment(chat.messages.slice(-1)[0].created_at).format('LL')){%>
+                                                                Yesterday
+                                                                <%}else{%>
+                                                                    <%= moment(chat.messages.slice(-1)[0].created_at).format('L') %>
+                                                                        <%}%>
+                                                </div>
+                                            </div>
+                                            <div class="message-content" style="max-width: 22vw;">
+                                                <% if(chat.messages.slice(-1)[0].from == contact._id){%>
+                                                    <%= contact.firstname + ' ' + contact.lastname + " : " +chat.messages.slice(-1)[0].body %>
+                                                        <%}else{%>
+                                                            <%=  "you : " +chat.messages.slice(-1)[0].body %>
+                                                                <%}%>
+                                            </div>
+                                        </div>
+                                        <% if(contact.is_active == null){ %>
+                                            <div class="status" style="color: red;">
+                                                <i class="material-icons prefix" style="font-size: 19px;">radio_button_checked</i>
+                                            </div>
+                                            <%}else{%>
+                                                <div class="status" style="color: green;">
+                                                    <i class="material-icons prefix" style="font-size: 19px;">radio_button_checked</i>
+                                                </div>
+                                                <%}%>
+                                                    <%}else{%>
+                                                        <div class="content">
+                                                            <div class="combine row" style="max-width: 26vw;">
+                                                                <div class="sender col-7" style="text-transform: capitalize;">
+                                                                    <%= contact.firstname + ' ' + contact.lastname %>
+                                                                </div>
+                                                                <div class="date col-5"></div>
+                                                            </div>
+                                                            <div class="message-content" style="max-width: 22vw;">
+                                                            </div>
+                                                        </div>
+                                                        <% if(contact.is_active == null){ %>
+                                                            <div class="status" style="color: red;">
+                                                                <i class="material-icons prefix" style="font-size: 19px;">radio_button_checked</i>
+                                                            </div>
+                                                            <%}else{%>
+                                                                <div class="status" style="color: green;">
+                                                                    <i class="material-icons prefix" style="font-size: 19px;">radio_button_checked</i>
+                                                                </div>
+                                                                <%}%>
+                                                                    <%}%>
+                                                                        <% } %>
+                                                                            <% }); %>
+                                                                                <% } %>
+                    </div>
+                    <% }); %>
+                        <% } %>
+        </div>
+
+        <div class="multiple-chat col-xl-8 col-lg-8 col-md-6 col-sm-5">
+            <div id="initial">
+                <div class="header">
+                    <img class="chats-img" style="border:none;" src="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" />
+                    <div class="header-sender-name m-auto center-align" style="text-transform:capitalize;font-weight: bold;">BAATCHEET</div>
+                    <div class="dots" id="dots">
+                        <div class="dot ml-auto"><img src="../images/download1.png" class="dot-image" /></div>
+                        <div class="menu">
+                            <div class="menu-text">Info</div>
+                            <div class="menu-text">Media</div>
+                            <div class="menu-text">Mute</div>
+                            <div class="menu-text"><a href="/account">Profile</a></div>
+                            <div class="menu-text"><a href="/logout">Logout</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clicktoadd">
+                    <div>Click on any contact to open a chatroom!</div>
+                </div>
+            </div>
+            <% if(typeof ucontacts != 'undefined'){ %>
+                <% ucontacts.forEach(function(contact) { %>
+
+                    <div class="chats cbox1" style="display: none;">
+                        <div class="header">
+                            <img class="chats-img" src="../images/face6.PNG" />
+                            <div class="hidden-user">
+                                <%= contact._id %>
+                            </div>
+                            <div class="hidden-phone">
+                                <%= contact.phone %>
+                            </div>
+                            <div class="header-sender-name m-auto center-align" style="text-transform:capitalize;font-weight: bold;">
+                                <%= contact.firstname + ' ' + contact.lastname %>
+                            </div>
+                            <div class="dots">
+                                <div class="dot ml-auto"><img src="../images/download1.png" class="dot-image" /></div>
+                                <div class="menu">
+                                    <div class="menu-text">Info</div>
+                                    <div class="menu-text">Media</div>
+                                    <div class="menu-text">Mute</div>
+                                    <div class="menu-text rem_cont"><a>Remove Contact</a></div>
+                                    <div class="menu-text"><a href="/account">Profile</a></div>
+                                    <div class="menu-text"><a href="/logout">Logout</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-box">
+                            <% if(typeof chats != 'undefined'){ %>
+                                <% chats.forEach(function(chat) { %>
+                                    <% if(chat.members.includes(contact._id)){ %>
+                                        <%var date = "";%>
+                                            <% chat.messages.forEach(function(message){ %>
+                                                <% if(message.from == contact._id){ %>
+
+                                                    <% if(date != moment(message.created_at).format('LL')){%>
+                                                        <br />
+                                                        <div class="badge-div"><span class="badge badge-secondary">
+                                 <% if(moment().format('LL') == moment(message.created_at).format('LL')){ %>
+                                    Today 
+                                 <%}else if(moment().subtract(1, 'day').format('LL') == moment(message.created_at).format('LL')){%>
+                                    Yesterday
+                                 <%}else{%>
+                                    <%= moment(message.created_at).format('LL') %>
+                                 <%}%>
+                              <% date =  moment(message.created_at).format('LL'); %>
+                              </span></div>
+                                                        <%}%>
+
+                                                            <div class="single-message">
+                                                                <div class="test" style="background-color:white;padding: 8px;border-radius: 10px;min-width: 150px;float: right !important;">
+                                                                    <div class="chat-message row" style="padding: 0px !important;">
+                                                                        <div class="sender-name col-10" id="owner">
+                                                                            <%= contact.firstname + ' ' + contact.lastname %>
+                                                                        </div>
+                                                                        <div class="cros col-2" style="padding: 0px !important;float: right;position: relative;">
+                                                                            <span style="position: absolute;right: 16px;top: -2px;"></span>
+                                                                        </div>
+                                                                        <div class="hide_msg_id">
+                                                                            <%= message._id%>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="chat-content">
+
+                                                                        <pre><%= message.body %></pre>
+                                                                    </div>
+                                                                    <div class="chat-date" style="white-space: nowrap; float: right;">
+                                                                        <%= moment(message.created_at).format('hh:mm a') %>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div><br />
+                                                            <%} else { %>
+                                                                <% if(date != moment(message.created_at).format('LL')){%>
+                                                                    <br />
+                                                                    <div class="badge-div"><span class="badge badge-secondary">
+                                 <% if(moment().format('LL') == moment(message.created_at).format('LL')){%>
+                                    Today 
+                                 <%}else if(moment().subtract(1, 'day').format('LL') == moment(message.created_at).format('LL')){%>
+                                    Yesterday
+                                 <%}else{%>
+                                    <%= moment(message.created_at).format('LL') %>
+                                 <%}%>
+                              <% date =  moment(message.created_at).format('LL'); %>
+                              </span></div>
+                                                                    <%}%>
+                                                                        <div class="single-message" style="justify-content: flex-end;">
+                                                                            <div class="test" style="background-color:#b9ffb9;padding: 8px;border-radius: 10px;min-width: 150px;float: right !important;">
+                                                                                <div class="chat-message row" style="padding: 0px !important;">
+                                                                                    <div class="sender-name col-10" id="owner">you</div>
+                                                                                    <div class="cross col-2" style="padding: 0px !important;float: right;position: relative;" onclick="removemsg(this);remchild(this);">
+                                                                                        <span style="position: absolute;right: 16px;top: -2px;">x</span>
+                                                                                    </div>
+                                                                                    <div class="hide_msg_id">
+                                                                                        <%= message._id%>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="chat-content">
+                                                                                    <pre><%= message.body %></pre>
+                                                                                </div>
+                                                                                <div class="chat-date" style="white-space: nowrap; float: right;">
+                                                                                    <%= moment(message.created_at).format('hh:mm a') %>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div><br />
+                                                                        <% } %>
+                                                                            <% }); %>
+                                                                                <% } %>
+                                                                                    <% }); %>
+                                                                                        <% } %>
+                        </div>
+                        <div class="footer">
+                            <div class="emoji">
+                                <div class="emoji-menu scrollbar">
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F600</div>
+                                        <div class="single-emoji">&#x1F601</div>
+                                        <div class="single-emoji">&#x1F602</div>
+                                        <div class="single-emoji">&#x1F603</div>
+                                        <div class="single-emoji">&#x1F612</div>
+                                        <div class="single-emoji">&#x1F613</div>
+                                        <div class="single-emoji">&#x1F614</div>
+                                        <div class="single-emoji">&#x1F615</div>
+                                        <div class="single-emoji">&#x1F638</div>
+                                        <div class="single-emoji">&#x1F63A</div>
+                                    </div><br />
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F604</div>
+                                        <div class="single-emoji">&#x1F605</div>
+                                        <div class="single-emoji">&#x1F606</div>
+                                        <div class="single-emoji">&#x1F607</div>
+                                        <div class="single-emoji">&#x1F616</div>
+                                        <div class="single-emoji">&#x1F617</div>
+                                        <div class="single-emoji">&#x1F618</div>
+                                        <div class="single-emoji">&#x1F619</div>
+                                        <div class="single-emoji">&#x1F637</div>
+                                        <div class="single-emoji">&#x1F636</div>
+                                    </div><br />
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F608</div>
+                                        <div class="single-emoji">&#x1F609</div>
+                                        <div class="single-emoji">&#x1F610</div>
+                                        <div class="single-emoji">&#x1F611</div>
+                                        <div class="single-emoji">&#x1F620</div>
+                                        <div class="single-emoji">&#x1F621</div>
+                                        <div class="single-emoji">&#x1F622</div>
+                                        <div class="single-emoji">&#x1F623</div>
+                                        <div class="single-emoji">&#x1F634</div>
+                                        <div class="single-emoji">&#x1F635</div>
+                                    </div><br />
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F60A</div>
+                                        <div class="single-emoji">&#x1F60B</div>
+                                        <div class="single-emoji">&#x1F60C</div>
+                                        <div class="single-emoji">&#x1F60D</div>
+                                        <div class="single-emoji">&#x1F61A</div>
+                                        <div class="single-emoji">&#x1F61B</div>
+                                        <div class="single-emoji">&#x1F61C</div>
+                                        <div class="single-emoji">&#x1F61D</div>
+                                        <div class="single-emoji">&#x1F61E</div>
+                                        <div class="single-emoji">&#x1F61F</div>
+                                    </div><br />
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F60E</div>
+                                        <div class="single-emoji">&#x1F60F</div>
+                                        <div class="single-emoji">&#x1F622</div>
+                                        <div class="single-emoji">&#x1F623</div>
+                                        <div class="single-emoji">&#x1F624</div>
+                                        <div class="single-emoji">&#x1F625</div>
+                                        <div class="single-emoji">&#x1F626</div>
+                                        <div class="single-emoji">&#x1F627</div>
+                                        <div class="single-emoji">&#x1F628</div>
+                                        <div class="single-emoji">&#x1F629</div>
+                                    </div><br />
+                                    <div style="display: flex;">
+                                        <div class="single-emoji">&#x1F630</div>
+                                        <div class="single-emoji">&#x1F631</div>
+                                        <div class="single-emoji">&#x1F632</div>
+                                        <div class="single-emoji">&#x1F633</div>
+                                        <div class="single-emoji">&#x1F62A</div>
+                                        <div class="single-emoji">&#x1F62B</div>
+                                        <div class="single-emoji">&#x1F62C</div>
+                                        <div class="single-emoji">&#x1F62D</div>
+                                        <div class="single-emoji">&#x1F62E</div>
+                                        <div class="single-emoji">&#x1F62F</div>
+                                    </div>
+                                </div>
+                                <div class="main-emoji">
+                                    <img src="../images/symbol1.PNG" />
+                                </div>
+                            </div>
+                            <div class="textinput row"><textarea type="text" id="input-message" name="input-message" class="scrollbar inputText col-10" placeholder="text message">
+                  </textarea>
+                                <label for="input-message" class="col-2" onclick="{storemsg(this,'<%= user._id %>','<%= contact._id %>','<%= user.phone %>');}"><img id="messageimg" src="../images/me.png" /></label>
+                                <!--<div class="overflow"></div>-->
+                            </div>
+                            <div class="audio"><img src="../images/symbol4.PNG" /></div>
+                            <div class="attach">
+                                <input type="file" id="input-text" />
+                                <label for="input-text"><img src="../images/symbol2.PNG" /></label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% }); %>
+                        <% } %>
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <script src="../js/socket.js"></script>
+    <script src="../js/jquery.js"></script>
+    <!--<script>$(document).ready(function(){
+            $('.dot:nth-child(0)').click(function(){
+                $('.menu:nth-child(0)').slideToggle();
+            }); 
+        });
+</script>-->
+    <script src="../js/javascrpt.js">
+    </script>
+    <script>
+        var em = document.getElementsByClassName('single-emoji');
+        for (var i = 0; i < em.length; i++) {
+            var ems = em[i];
+            ems.addEventListener('click', emoji);
+        }
+        document.getElementById('dots').addEventListener('click', openOptions);
+
+        function openOptions(event) {
+            var dot = event.target;
+            var dots = dot.parentElement.parentElement;
+            var menu = dots.lastElementChild;
+            $(document).ready(function() {
+
+                $(menu).slideToggle();
+                $('body').click(function(event) {
+                    if (!$(event.target).is(dot)) {
+                        $(menu).hide();
+                    }
+                });
+
+            });
+
+        }
+
+        function emoji(event) {
+            var em_code = event.target;
+            var input = em_code.parentElement.parentElement.parentElement.nextSibling.firstChild;
+            input.value = input.value + em_code.innerHTML;
+            console.log(input.value);
+        }
+
+        function emojiUnicode(emoji) {
+            var comp;
+            if (emoji.length === 1) {
+                comp = emoji.charCodeAt(0);
+            }
+            comp = (
+                (emoji.charCodeAt(0) - 0xD800) * 0x400 +
+                (emoji.charCodeAt(1) - 0xDC00) + 0x10000
+            );
+            if (comp < 0) {
+                comp = emoji.charCodeAt(0);
+            }
+            return comp.toString("16");
+        };
+
+        var rem_cont = document.getElementsByClassName('rem_cont');
+        for (var i = 0; i < rem_cont.length; i++) {
+            var rcontact = rem_cont[i];
+            rcontact.addEventListener('click', remove_contact);
+        }
+
+        function remove_contact(event) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This contact will be removed!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'REMOVE'
+            }).then((result) => {
+                if (result.value) {
+                    var rem = event.target;
+                    var cid = rem.parentElement.parentElement.parentElement.parentElement;
+                    var c_id = cid.childNodes[3];
+                    remove_cont(c_id.innerHTML);
+                }
+            })
+        }
+
+        document.getElementById('input-message').value = "";
+        var err = "<%= contact_err %>";
+        if (err) {
+            Swal.fire({
+                title: 'Error!',
+                text: err,
+                icon: 'error'
+            });
+        }
+        var succ = "<%= contact_succ %>";
+        if (succ) {
+            Swal.fire({
+                title: 'Added!',
+                text: succ,
+                icon: 'success'
+            });
+        }
+    </script>
+
+
+
+</body>
+
+</html>

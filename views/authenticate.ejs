@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" style="background-color: transparent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!--sweet alert-->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>messagingclone</title>
+
+</head>
+
+<body>
+    <div class="whole row">
+        <div class="multiple-chat col s8">
+            <div class="chats cbox1">
+                <div class="header" style="width: 100% !important;">
+                    <div class="header-sender-name text-center" style="margin: auto;">LOGIN / SIGNUP</div>
+                </div>
+
+                <div class="chat-box" style="margin-top: 6rem !important;width: 75%;margin-left: auto;margin-right: auto;">
+                    <div class="card-panel center" style="margin-bottom:0px">
+                        <ul class="tabs" id="tabs">
+                            <li class="tab active" id="login-tab" style="width:46%"><a href="#login" class="active green-text" style="text-decoration:none">LOGIN</a></li>
+                            <li class="tab" id="signup-tab" style="width:46%"><a href="#signup" class="green-text" style="text-decoration:none">SIGNUP</a></li>
+                        </ul>
+                    </div>
+                    <div id="login" class="card-panel center login-panel panel" style="margin-top:0px">
+
+                        <form class="form" method="post" action="/user/login" style="margin: 0rem 3rem;">
+
+                            <%- include('./loginmsg'); %>
+
+                                <div class="row">
+                                    <div class="input-field col-sm-12">
+                                        <i class="material-icons prefix">email</i>
+                                        <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" class="validate" required oninvalid="this.setCustomValidity('This field is required to Log In')" oninput="this.setCustomValidity('')" value="<%= typeof lemail != 'undefined' ? lemail : '' %>"
+                                        />
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col-sm-12">
+                                        <i class="material-icons prefix">phone</i>
+                                        <input id="phoneno" type="number" maxlength="10" class="validate" name="phone" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" oninput="this.setCustomValidity('')" required oninvalid="this.setCustomValidity('This field is required to Log In')"
+                                            oninput="this.setCustomValidity('')" value="<%= typeof lphone != 'undefined' ? lphone : '' %>" />
+                                        <label for="phoneno">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="row" id="padd" style="margin-bottom: 0px !important;">
+                                    <div class="input-field col s11">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input id="pass" type="password" class="validate" name="password" required oninvalid="this.setCustomValidity('This field is required to Log In')" oninput="this.setCustomValidity('')">
+                                        <label for="pass">Password</label>
+                                    </div>
+                                    <div class="col s1">
+                                        <i class="material-icons prefix" id="hide_pw" style="margin-top:20px;color:black; cursor:pointer; font-size:24px; " onclick="ToggleLoginPassword(event)">remove_red_eye</i>
+                                    </div>
+                                </div>
+                                <div style=" padding-bottom : 12.5vh">
+                                    <a href="/forgot" style="text-decoration: none;float: right;">Forgot Password</a>
+                                </div>
+
+
+                                <input type="submit" name="login" value="LOGIN" class="btn btn-success container center" id="loginbtn" style="background-color: green !important;" />
+                        </form>
+                    </div>
+
+                    <div id="signup" class="card-panel center signup-panel panel" style="margin-top:0px">
+
+                        <form class="form" method="post" action="/user/signup" style="margin: 0rem 3rem;">
+
+                            <%- include('./signupmsg'); %>
+
+                                <div class="row" style="margin-bottom: 0px;">
+                                    <div class="input-field col-12 col-sm-6">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="first_name" name="firstname" type="text" class="validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')" value="<%= typeof firstname != 'undefined' ? firstname : '' %>"
+                                        />
+                                        <label for="first_name">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 0px;">
+                                    <div class="input-field col-12 col-sm-6">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="last_name" name="lastname" type="text" class="validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')" value="<%= typeof lastname != 'undefined' ? lastname : '' %>" />
+                                        <label for="last_name">Last Name</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="margin-bottom: 0px;">
+                                    <div class="input-field col-sm-12">
+                                        <i class="material-icons prefix">email</i>
+                                        <input id="emailId" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required type="email" name="email" class="validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')" value="<%= typeof email != 'undefined' ? email : '' %>">
+                                        <label for="emailId">Email</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 0px;">
+                                    <div class="input-field col-sm-12">
+                                        <i class="material-icons prefix">phone</i>
+                                        <input id="phone" type="number" name="phone" maxlength="10" class="validate" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" oninput="this.setCustomValidity('')" required oninvalid="this.setCustomValidity('This field is required to Sign Up')"
+                                            oninput="this.setCustomValidity('')" value="<%= typeof phone != 'undefined' ? phone : '' %>">
+                                        <label for="phone">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 0px;">
+                                    <div class="input-field col s11">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input id="password" type="password" name="password" class="validate" required oninvalid="this.setCustomValidity('This field is required to Sign Up')" oninput="this.setCustomValidity('')">
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="col s1">
+                                        <i class="material-icons prefix" id="hide_pw" style="margin-top:20px;color:black; cursor:pointer; font-size:24px" onclick="ToggleSignupPassword(event)">remove_red_eye</i>
+                                    </div>
+
+                                </div>
+                                <div class="form-group text-center" style="margin: 23px 0px ">
+                                    <label class="label1">
+                                    <input type="checkbox" class="filled-in" required>
+                                    <span>I accept the <span class="text-success">Terms of use</span> and Privacy
+                                        Policy.</span>
+                                </label>
+                                </div>
+                                <input type="submit" name="signup" class="btn btn-success container" id="signupbtn" style="background-color: green !important;" />
+
+                        </form>
+                    </div>
+                    <div class="row" style="display: flex;">
+                        <div class="google-btn social-btn">
+                            <div class="google-icon-wrapper icon-wrapper">
+                                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                            </div>
+                            <div class="btn-text"><b><a href="/auth/google" style="text-decoration: none;color: white;">Sign In with Google</a></b></div>
+                        </div>
+                        <div class="fb-btn social-btn">
+                            <div class="fb-icon-wrapper icon-wrapper">
+                                <img class="fb-icon" src="..//images/fb.png" />
+                            </div>
+                            <div class="btn-text"><b><a href="/auth/facebook" style="text-decoration: none;color: white;">Sign In with Facebook</a></b></div>
+                        </div>
+                        <div class="git-btn social-btn">
+                            <div class="git-icon-wrapper icon-wrapper">
+                                <img class="git-icon" src="..//images/git.png" />
+                            </div>
+                            <div class="btn-text"><b><a href="/auth/google" style="text-decoration: none;color: white;">Sign In with Github</a></b></div>
+                        </div>
+                        <div class="tweet-btn social-btn">
+                            <div class="tweet-icon-wrapper icon-wrapper">
+                                <img class="tweet-icon" src="..//images/tweet.png" />
+                            </div>
+                            <div class="btn-text"><b><a href="/auth/google" style="text-decoration: none;color: white;">Sign In with Twitter</a></b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="../js/jquery.js"></script>
+        <script src="../js/javascrpt.js">
+        </script>
+        <script src="../js/materialize.js"></script>
+        <script>
+            var pwd = "<%= pwd %>";
+            if (pwd) {
+                Swal.fire({
+                    title: pwd,
+                    text: "Login again!!",
+                    icon: 'success'
+                });
+            }
+
+            function ToggleLoginPassword(ev) {
+                var y = ev.target;
+                var x = document.getElementById("pass");
+                if (x.type === "password") {
+                    x.type = "text";
+                    y.style.color = "rgba(0, 128, 0, 0.7)";
+                } else {
+                    x.type = "password";
+                    y.style.color = "black";
+                }
+            }
+
+            function ToggleSignupPassword(ev) {
+                var y = ev.target;
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                    y.style.color = "rgba(0, 128, 0, 0.7)";
+                } else {
+                    x.type = "password";
+                    y.style.color = "black";
+                }
+            }
+
+
+            var element = document.getElementsByClassName('chats');
+            element[0].scrollTop = 0;
+            $('#alert_close').click(function() {
+                $("#alert_box").fadeOut("slow", function() {});
+            });
+            $(document).ready(function() {
+                $('.tabs').tabs();
+            });
+            //
+        </script>
+
+</body>
+
+</html>

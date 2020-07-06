@@ -1,0 +1,837 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*before,
+*after {
+    box-sizing: inherit;
+}
+
+.social-btn {
+    width: 23.6%;
+    margin-left: 10px;
+    height: 42px;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+}
+
+.google-btn {
+    background-color: #4285f4;
+}
+
+.git-btn {
+    background-color: rgb(102, 102, 102);
+}
+
+.tweet-btn {
+    background-color: #5FB5F1;
+}
+
+.fb-btn {
+    background-color: blue;
+}
+
+.google-icon-wrapper {
+    background-color: #fff;
+}
+
+.fb-icon-wrapper {
+    background-color: blue;
+}
+
+.tweet-icon-wrapper {
+    background-color: #5FB5F1;
+}
+
+.git-icon-wrapper {
+    background-color: rgb(102, 102, 102);
+}
+
+.icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.google-icon,
+.fb-icon,
+.git-icon,
+.tweet-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 19px;
+    height: 19px;
+}
+
+.btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+
+.google-btn:hover {
+    box-shadow: 0 0 6px #4285f4;
+}
+
+.google-btn:active {
+    background: #1669F2;
+}
+
+body {
+    font-family: sans-serif !important;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background-image: url(../images/BACKGROUND.jpg);
+}
+
+pre {
+    font-family: sans-serif !important;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+    width: unset !important;
+}
+
+.whole {
+    display: flex;
+}
+
+.tabs .tab a {
+    color: green !important;
+}
+
+.tabs .tab a.active {
+    color: green !important;
+}
+
+.tabs .tab a:hover {
+    color: green !important;
+}
+
+.tabs .tab a:focus {
+    background-color: rgba(0, 255, 0, 0.1) !important;
+}
+
+.tabs .tab a:focus.active {
+    background-color: rgba(0, 255, 0, 0.1) !important;
+}
+
+.tabs .indicator {
+    background-color: green !important;
+}
+
+.icon_style {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.messagestyle {
+    line-height: 1.5;
+    font-size: 17px;
+    padding: 9px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.alertsuccess {
+    background-color: #43a047 !important;
+    color: #fff;
+}
+
+.alerterror {
+    background-color: #c62828 !important;
+    color: #fff;
+}
+
+
+/* label color */
+
+.input-field label {
+    color: #000;
+}
+
+
+/* label focus color */
+
+.input-field input:focus+label {
+    color: green !important;
+}
+
+
+/* label underline focus color */
+
+.input-field input:focus {
+    border-bottom: 1px solid green !important;
+    box-shadow: 0 1px 0 0 green !important;
+}
+
+
+/* valid color */
+
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+
+
+/* invalid color */
+
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+
+
+/* icon prefix focus color */
+
+.input-field .prefix.active {
+    color: green !important;
+}
+
+.contacts img {
+    width: 5vw;
+    height: 8vh;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin: 0px 20px 5px 0px;
+}
+
+.clicktoadd {
+    position: absolute;
+    top: 43%;
+    left: 25%;
+    width: auto;
+    height: auto;
+    background-color: green;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.col {
+    padding: 0px !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden-phone {
+    display: none;
+}
+
+.hidden-userid {
+    display: none;
+}
+
+.hidden-user {
+    display: none;
+}
+
+.contain {
+    border-right: solid 1px grey;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px !important;
+    background-color: white !important;
+}
+
+.contacts {
+    display: flex;
+    border-bottom: solid 1px grey;
+    height: 14vh;
+    padding: 15px;
+    padding-bottom: 0;
+    cursor: pointer;
+    background-color: white;
+    width: 100%;
+    position: relative;
+}
+
+.status {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+}
+
+.hver:hover {
+    background-color: #EEEEEE !important;
+}
+
+.john {
+    background-color: gainsboro;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+.badge-div {
+    text-align-last: center;
+}
+
+.sender a {
+    text-decoration: none !important;
+    color: green;
+}
+
+.sender a :hover {
+    color: green;
+}
+
+.search {
+    height: inherit;
+    padding-left: 4rem !important;
+    width: calc(100% - 4rem);
+    border: 0;
+    box-shadow: none;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+    width: 98% !important;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.chats {
+    flex: 2;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.chats-img {
+    width: 5%;
+    height: 6vh;
+    border: solid 2px black;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.combine {
+    height: 48px;
+}
+
+.single-emoji {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.header {
+    display: flex;
+    background-color: green;
+    padding: 5px;
+    color: white;
+    position: fixed;
+    width: 66%;
+    height: 56px;
+    z-index: 1;
+}
+
+.dots {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: green;
+    color: white;
+    width: 19%;
+    padding-right: 10px;
+}
+
+.header-sender-name {
+    width: 40%;
+    text-align: center !important;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width:990px) {
+    .header {
+        display: flex;
+        background-color: green;
+        padding: 5px;
+        color: white;
+        position: fixed;
+        width: 50%;
+        height: 50px;
+    }
+}
+
+.chat-box {
+    margin-top: 55px;
+    margin-bottom: 51px;
+    padding-left: 0px;
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width:767px) {
+    .header {
+        display: flex;
+        background-color: green;
+        padding: 5px;
+        color: white;
+        position: fixed;
+        width: 41.5%;
+        height: 50px;
+    }
+}
+
+.test {
+    max-width: 85%;
+}
+
+.single-message {
+    display: flex;
+    padding-left: 10px;
+    display: inline-flex;
+    margin-left: 20px;
+    margin-top: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 93%;
+    background-color: transparent !important;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: row;
+}
+
+.message-content {
+    color: grey;
+    margin-top: -10px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.cross {
+    font-size: 15px;
+    color: gray;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-bottom: 0;
+}
+
+.sender-name {
+    color: blue;
+}
+
+#messageimg {
+    width: 34px;
+}
+
+pre {
+    width: max-content;
+    margin: 0px !important;
+}
+
+.chat-date {
+    font-size: 12px;
+    color: gray;
+    padding-bottom: 0;
+    margin-top: -3.5px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.chat-date-sticker {
+    font-size: 12px;
+    color: gray;
+    margin-left: 5px;
+    margin-bottom: 1px;
+    padding-bottom: 0;
+    margin-top: 65px !important;
+}
+
+.contain {
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.dt {
+    position: relative;
+    top: -10px;
+}
+
+.dot {
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid green;
+}
+
+.menu {
+    background-color: white;
+    margin-top: 9px;
+    display: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.dot-image {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-text {
+    text-align: center;
+    color: black;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 19px;
+    font-weight: 100;
+    border-bottom: 1px solid gainsboro;
+}
+
+.menu-text a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-text a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-text:hover {
+    background-color: gainsboro;
+}
+
+.multiple-chat {
+    display: flex;
+    flex: 2;
+    position: relative;
+    flex-direction: column;
+    height: 100vh;
+    padding-left: 0px !important;
+}
+
+.cbox5,
+.cbox6,
+.cbox2,
+.cbox3,
+.cbox4 {
+    display: none;
+}
+
+.hide_msg_id {
+    display: none;
+}
+
+.footer {
+    display: flex;
+    background-color: #EEEEEE;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    position: fixed;
+    width: 68%;
+    height: 50px;
+    top: 617px;
+}
+
+@media only screen and (max-width:990px) {
+    .footer {
+        display: flex;
+        background-color: #EEEEEE;
+        align-items: center;
+        justify-content: center;
+        margin-top: 100px;
+        position: fixed;
+        width: 50%;
+        height: 50px;
+        top: 490px;
+    }
+}
+
+@media only screen and (max-width:576px) {
+    .footer {
+        display: none;
+        background-color: #EEEEEE;
+        align-items: center;
+        justify-content: center;
+        margin-top: 100px;
+        position: fixed;
+        width: 50%;
+        height: 50px;
+        top: 490px;
+    }
+}
+
+.sticker {
+    width: 50px;
+    height: 50px;
+    margin-top: 7px;
+    border: 0px !important;
+    border-radius: 20px;
+}
+
+.emoji {
+    width: 5%;
+}
+
+.emoji-menu {
+    padding-bottom: 7px;
+    padding-top: 10px;
+    padding-left: 8px;
+    margin-top: -177px;
+    margin-left: -10px;
+    margin-bottom: 5px;
+    overflow-y: scroll;
+    background-color: white;
+    width: 340px;
+    max-height: 180px;
+    overflow-x: hidden;
+}
+
+.emoji-img {
+    border: none;
+    cursor: pointer;
+    width: 23%;
+    height: 6vh;
+    border-radius: 20px;
+}
+
+.main-emoji {
+    width: 80%;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1px;
+    margin-right: 10px;
+    margin-left: -36px;
+    padding: 0px !important;
+}
+
+.main-emoji img {
+    width: 140%;
+    height: 6vh;
+}
+
+.audio {
+    display: none;
+    width: 7%;
+    margin-top: -5px;
+}
+
+.audio img {
+    cursor: pointer;
+}
+
+.textinput {
+    width: 60%;
+    height: 26px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+textarea {
+    resize: none !important;
+    margin-top: -7px !important;
+    height: 39px !important;
+}
+
+.textinput input {
+    border: none;
+    width: 100%;
+    height: 32px;
+    font-size: 16px;
+    padding-left: 0.5rem;
+    border-radius: 10px;
+}
+
+.attach {
+    width: 7%;
+}
+
+.attach input {
+    display: none;
+}
+
+.attach label img {
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+/* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+
+
+/* total width */
+
+.scrollbar::-webkit-scrollbar {
+    background-color: #fff;
+    width: 16px
+}
+
+
+/* background of the scrollbar except button or resizer */
+
+.scrollbar::-webkit-scrollbar-track {
+    background-color: #fff
+}
+
+.scrollbar::-webkit-scrollbar-track:hover {
+    background-color: #f4f4f4
+}
+
+
+/* scrollbar itself */
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 5px solid #fff
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a5;
+    border: 4px solid #f4f4f4
+}
+
+
+/* set button(top and bottom of the scrollbar) */
+
+.scrollbar::-webkit-scrollbar-button {
+    display: none
+}
+
+
+/* div box */
+
+.scrollbar {
+    min-width: 150px;
+    background: #fff;
+    overflow-y: scroll
+}
+
+.overflow {
+    min-height: 100vh
+}
+
+.hm-gradient {
+    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+
+.darken-grey-text {
+    color: #2E2E2E;
+}
+
+.danger-text {
+    color: #ff3547;
+}
+
+.default-text {
+    color: #2BBBAD;
+}
+
+.info-text {
+    color: #33b5e5;
+}
+
+.form-white .md-form label {
+    color: #fff;
+}
+
+.form-white input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #fff;
+    -webkit-box-shadow: 0 1px 0 0 #fff;
+    box-shadow: 0 1px 0 0 #fff;
+}
+
+.form-white input[type=text]:focus:not([readonly])+label {
+    color: #fff;
+}
+
+.form-white input[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid #fff;
+    -webkit-box-shadow: 0 1px 0 0 #fff;
+    box-shadow: 0 1px 0 0 #fff;
+}
+
+.form-white input[type=password]:focus:not([readonly])+label {
+    color: #fff;
+}
+
+.form-white input[type=password],
+.form-white input[type=text] {
+    border-bottom: 1px solid #fff;
+}
+
+.form-white .form-control:focus {
+    color: #fff;
+}
+
+.form-white .form-control {
+    color: #fff;
+}
+
+.form-white textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #fff;
+    box-shadow: 0 1px 0 0 #fff;
+    color: #fff;
+}
+
+.form-white textarea.md-textarea {
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.form-white textarea.md-textarea:focus:not([readonly])+label {
+    color: #fff;
+}
+
+.md-form label {
+    margin-left: 3.5rem !important;
+    margin-top: -0.5rem !important;
+}
+
+.md-form input {
+    text-transform: capitalize;
+}
+
+.md-form .prefix {
+    top: 0 !important;
+}
+
+.ripe-malinka-gradient {
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+}
+
+.near-moon-gradient {
+    background-image: linear-gradient(to bottom, #5ee7df 0%, #b490ca 100%);
+}

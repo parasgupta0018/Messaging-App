@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" style="background-color: transparent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>messagingclone</title>
+
+</head>
+
+<body>
+    <div class="whole row">
+        <div class="multiple-chat col s8">
+            <div class="chats cbox1" style="overflow: hidden !important;">
+                <div class="header" style="width: 100% !important;">
+                    <div class="header-sender-name text-center" style="margin: auto;">Add Contacts</div>
+                </div>
+                <form action="/searchcontact" method="GET" style="margin-top: 68px;background-color: whitesmoke;">
+                    <div class="input-field">
+                        <input id="search" type="search" name="search" class="form-control search"
+                            placeholder="Contact Number" required>
+                        <label class="label-icon" style="margin-top: 9px;" for="search"><i
+                                class="material-icons">search</i></label>
+                        <i class="material-icons" style="margin-top: 9px;">close</i>
+                    </div>
+                </form>
+                <% if(user) { %>
+                <h4 class="text-danger mt-4">Search Results: </h4>
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><%= user.firstname + ' ' + user.lastname %></td>
+                            <td><%= user.phone %></td>
+                            <td>$<%= employee.salary %></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <% } else if(user != ''){ %>
+
+                <div class="alert alert-danger mt-4">contact does not exist.</div>
+
+                <% } %>
+
+
+            </div>
+
+        </div>
+
+        <script src="../js/jquery.js"></script>
+        <script src="../js/javascrpt.js">
+        </script>
+        <script src="../js/materialize.js"></script>
+
+
+</body>
+
+</html>

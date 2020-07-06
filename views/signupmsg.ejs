@@ -1,0 +1,27 @@
+<% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
+  
+<script>
+  var elem = document.querySelector('.tabs');
+  //console.log(elem);
+  var instance = M.Tabs.init(elem);
+  //console.log(elem);
+  instance.select('signup');  
+</script>
+<div class="row" id="alert_box">
+  <div class="col s12 m12">
+    <div class="card alerterror darken-1">
+      <div class="row">
+        <div class="col s12">
+          <div class="card-content white-text messagestyle">
+            <p><%= error.msg %></p>
+          </div>
+        </div>
+        <div class="col s12 m2">
+          <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% }); %>
+<% } %>

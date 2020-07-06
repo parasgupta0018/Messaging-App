@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" style="background-color: transparent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!--sweet alert-->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>messagingclone</title>
+
+</head>
+
+<body>
+    <div class="whole row">
+        <div class="multiple-chat col s8">
+            <div class="chats cbox1">
+                <div class="header" style="width: 100% !important;">
+                    <div class="header-sender-name text-center" style="margin: auto;">FORGOT PASSWORD</div>
+                </div>
+
+                <div class="chat-box" style="margin-top: 6rem !important;width: 75%;margin-left: auto;margin-right: auto;">
+                    <div id="login" class="card-panel center login-panel panel" style="margin-top:0px">
+
+                        <form class="form" method="post" action="/forgotpwd" style="margin: 0rem 3rem;">
+
+                            <%- include('./loginmsg'); %>
+
+                                <div class="row">
+                                    <div class="input-field col-sm-12">
+                                        <i class="material-icons prefix">email</i>
+                                        <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" class="validate" required oninvalid="this.setCustomValidity('This field is required to Log In')" oninput="this.setCustomValidity('')" value="<%= typeof lemail != 'undefined' ? lemail : '' %>"
+                                        />
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div style=" padding-bottom : 12.5vh">
+                                    <a href="/" style="text-decoration: none;float: right;">Back to login</a>
+                                </div>
+                                <input type="submit" name="login" value="FORGOT PASSWORD" class="btn btn-success container center" id="loginbtn" style="background-color: green !important;" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="../js/jquery.js"></script>
+        <script src="../js/javascrpt.js">
+        </script>
+        <script src="../js/materialize.js"></script>
+        <script>
+            var pwd = "<%= pwd %>";
+            if (pwd) {
+                Swal.fire({
+                    title: pwd,
+                    text: "Login again!!",
+                    icon: 'success'
+                });
+            }
+
+            function ToggleLoginPassword(ev) {
+                var y = ev.target;
+                var x = document.getElementById("pass");
+                if (x.type === "password") {
+                    x.type = "text";
+                    y.style.color = "rgba(0, 128, 0, 0.7)";
+                } else {
+                    x.type = "password";
+                    y.style.color = "black";
+                }
+            }
+
+            function ToggleSignupPassword(ev) {
+                var y = ev.target;
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                    y.style.color = "rgba(0, 128, 0, 0.7)";
+                } else {
+                    x.type = "password";
+                    y.style.color = "black";
+                }
+            }
+
+            //
+        </script>
+
+</body>
+
+</html>
