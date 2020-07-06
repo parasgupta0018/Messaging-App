@@ -30,6 +30,8 @@ mongoose.connect(db, {
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
+}).then(() => {
+    console.log('database added');
 });
 
 require('./passport.js')(passport);
