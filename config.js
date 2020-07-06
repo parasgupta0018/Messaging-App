@@ -1,7 +1,11 @@
+const path = require('path')
+
+dotenv.config({ path: './config.env' });
+
 module.exports = {
     Google: {
-        clientID: '916020751719-9mqni7cmeeveu1qkhrk7sdsplp5gtgu0.apps.googleusercontent.com',
-        clientSecret: 'xmRPYYPXs69573TAymnIqQXD',
+        clientID: process.env.GclientID,
+        clientSecret: process.env.GclientSecret,
         callbackURL: 'http://localhost:3000/auth/google/callback'
     },
     Facebook: {
