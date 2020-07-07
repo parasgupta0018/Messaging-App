@@ -150,7 +150,7 @@ io.on("connection", (socket) => {
                                         .then(member => {
                                             member.forEach(mem => {
                                                 io.to(mem._id).emit('status-red', { id: user._id});
-                                                console.log(mem._id, 'inside menbers');
+                                                //console.log(mem._id, 'inside menbers');
                                             })
                                         })
                                 //}
