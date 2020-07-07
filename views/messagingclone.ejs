@@ -27,21 +27,18 @@
                 <form action="/searchcontact" style="width: 100%;">
                     <div class="form-group has-search" style="width: 102%;">
                         <span class="fa fa-search-plus form-control-feedback" style="color: green;"></span>
-                        <input autocomplete="off" type="number" name="search" maxlength="10" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" class="form-control" placeholder="Add a contact(number)" oninput="this.setCustomValidity('')"
-                        />
+                        <input autocomplete="off" type="number" name="search" maxlength="10" max="9999999999" min="1000000000" oninvalid="this.setCustomValidity('Phone number must be 10 digits long!')" class="form-control" placeholder="Add a contact(number)" oninput="this.setCustomValidity('')"/>
                     </div>
                 </form>
             </div>
             <% if(typeof ucontacts != 'undefined'){ %>
                 <% ucontacts.forEach(function(contact) { %>
                     <div class="contacts hver" onclick="{changeChatBox(this);changeRoom('<%= user._id %>','<%= contact._id %>')};">
-                        <img src="../images/face6.PNG" />
+                        <% if(contact.imgURL == null){%><img src="../images/profile.jpg" /><%}else{%><img src="<%= contact.imgURL %>" /><%}%>
                         <div class="hidden-userid">
                             <%= contact._id %>
                         </div>
-                        <div class="hidden">
-                            <%= contact.phone %>
-                        </div>
+                        <div class="hidden"><%= contact.phone %></div>
 
                         <% if(typeof chats != 'undefined'){ %>
                             <% chats.forEach(function(chat) { %>
@@ -137,13 +134,11 @@
                             <div class="hidden-user">
                                 <%= contact._id %>
                             </div>
-                            <div class="hidden-phone">
-                                <%= contact.phone %>
-                            </div>
+                            <div class="hidden-phone"><%= contact.phone %></div>
                             <div class="header-sender-name m-auto center-align" style="text-transform:capitalize;font-weight: bold;">
                                 <%= contact.firstname + ' ' + contact.lastname %>
                             </div>
-                            <div class="dots">
+                            <div class="dots" id="dots">
                                 <div class="dot ml-auto"><img src="../images/download1.png" class="dot-image" /></div>
                                 <div class="menu">
                                     <div class="menu-text">Info</div>
@@ -240,10 +235,7 @@
                                                                                     <% }); %>
                                                                                         <% } %>
                         </div>
-                        <div class="footer">
-                            <div class="emoji">
-                                <div class="emoji-menu scrollbar">
-                                    <div style="display: flex;">
+                        <div class="footer"><div class="emoji"><div class="emoji-menu scrollbar"><div style="display: flex;">
                                         <div class="single-emoji">&#x1F600</div>
                                         <div class="single-emoji">&#x1F601</div>
                                         <div class="single-emoji">&#x1F602</div>
@@ -254,8 +246,7 @@
                                         <div class="single-emoji">&#x1F615</div>
                                         <div class="single-emoji">&#x1F638</div>
                                         <div class="single-emoji">&#x1F63A</div>
-                                    </div><br />
-                                    <div style="display: flex;">
+                                    </div><br /><div style="display: flex;">
                                         <div class="single-emoji">&#x1F604</div>
                                         <div class="single-emoji">&#x1F605</div>
                                         <div class="single-emoji">&#x1F606</div>
@@ -266,8 +257,7 @@
                                         <div class="single-emoji">&#x1F619</div>
                                         <div class="single-emoji">&#x1F637</div>
                                         <div class="single-emoji">&#x1F636</div>
-                                    </div><br />
-                                    <div style="display: flex;">
+                                    </div><br /><div style="display: flex;">
                                         <div class="single-emoji">&#x1F608</div>
                                         <div class="single-emoji">&#x1F609</div>
                                         <div class="single-emoji">&#x1F610</div>
@@ -278,8 +268,7 @@
                                         <div class="single-emoji">&#x1F623</div>
                                         <div class="single-emoji">&#x1F634</div>
                                         <div class="single-emoji">&#x1F635</div>
-                                    </div><br />
-                                    <div style="display: flex;">
+                                    </div><br /><div style="display: flex;">
                                         <div class="single-emoji">&#x1F60A</div>
                                         <div class="single-emoji">&#x1F60B</div>
                                         <div class="single-emoji">&#x1F60C</div>
@@ -290,8 +279,7 @@
                                         <div class="single-emoji">&#x1F61D</div>
                                         <div class="single-emoji">&#x1F61E</div>
                                         <div class="single-emoji">&#x1F61F</div>
-                                    </div><br />
-                                    <div style="display: flex;">
+                                    </div><br /><div style="display: flex;">
                                         <div class="single-emoji">&#x1F60E</div>
                                         <div class="single-emoji">&#x1F60F</div>
                                         <div class="single-emoji">&#x1F622</div>
@@ -302,8 +290,7 @@
                                         <div class="single-emoji">&#x1F627</div>
                                         <div class="single-emoji">&#x1F628</div>
                                         <div class="single-emoji">&#x1F629</div>
-                                    </div><br />
-                                    <div style="display: flex;">
+                                    </div><br /><div style="display: flex;">
                                         <div class="single-emoji">&#x1F630</div>
                                         <div class="single-emoji">&#x1F631</div>
                                         <div class="single-emoji">&#x1F632</div>
@@ -319,9 +306,7 @@
                                 <div class="main-emoji">
                                     <img src="../images/symbol1.PNG" />
                                 </div>
-                            </div>
-                            <div class="textinput row"><textarea type="text" id="input-message" name="input-message" class="scrollbar inputText col-10" placeholder="text message">
-                  </textarea>
+                            </div><div class="textinput row"><textarea type="text" id="input-message" name="input-message" class="scrollbar inputText col-10" placeholder="text message"></textarea>
                                 <label for="input-message" class="col-2" onclick="{storemsg(this,'<%= user._id %>','<%= contact._id %>','<%= user.phone %>');}"><img id="messageimg" src="../images/me.png" /></label>
                                 <!--<div class="overflow"></div>-->
                             </div>
@@ -361,30 +346,12 @@
             var ems = em[i];
             ems.addEventListener('click', emoji);
         }
-        document.getElementById('dots').addEventListener('click', openOptions);
-
-        function openOptions(event) {
-            var dot = event.target;
-            var dots = dot.parentElement.parentElement;
-            var menu = dots.lastElementChild;
-            $(document).ready(function() {
-
-                $(menu).slideToggle();
-                $('body').click(function(event) {
-                    if (!$(event.target).is(dot)) {
-                        $(menu).hide();
-                    }
-                });
-
-            });
-
-        }
 
         function emoji(event) {
             var em_code = event.target;
             var input = em_code.parentElement.parentElement.parentElement.nextSibling.firstChild;
             input.value = input.value + em_code.innerHTML;
-            console.log(input.value);
+            
         }
 
         function emojiUnicode(emoji) {

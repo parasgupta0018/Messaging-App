@@ -43,7 +43,7 @@
 
 <body>
     <div class="header" style="width: 100% !important;position: static !important;">
-        <img class="chats-img" style="border:none;" src="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" />
+        <img class="chats-img" id="header-img" style="border:none;" src="../images/plogod614-41c9-a8ed-99372c8c45fa.ico" />
         <div class="header-sender-name m-auto center-align" style="text-transform:capitalize;font-weight: bold;">BAATCHEET</div>
         <div class="dots" id="dots">
             <div class="dot ml-auto"><img src="../images/download1.png" class="dot-image" /></div>
@@ -181,7 +181,9 @@
             console.log('aaya')
             form.submit();
         })
-
+        $('#header-img').click(function(){
+            window.location.href='/'
+        })
         var img = "<%= img_err %>";
         if (img) {
             Swal.fire({

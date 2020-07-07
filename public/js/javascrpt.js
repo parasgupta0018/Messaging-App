@@ -232,7 +232,7 @@ function sticker(event){
         var y=document.getElementsByClassName("hidden-phone");
         document.getElementById('initial').style.display="none";
         for(var i=0;i<y.length;i++)
-        {                   
+        {        
             if(x[0].innerHTML==y[i].innerHTML)
             {
                 chat[i].style.display="block";

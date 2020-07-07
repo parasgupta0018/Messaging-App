@@ -92,6 +92,7 @@ io.on("connection", (socket) => {
             }
         });
 
+        
 
     socket.on('changeRoom', ({ user, contact }) => {
         chatroom.findOne({ $or: [{ members: [user, contact] }, { members: [contact, user] }] })
@@ -140,15 +141,21 @@ io.on("connection", (socket) => {
             .then(user => {
                 if (user) {
                     //console.log("user: "+ user);
-                    user.contacts.forEach(contact => {
-                        usr.findById(contact)
-                            .then(cont => {
+                    //user.contacts.forEach(contact => {
+                        //usr.findById(contact)
+                            //.then(cont => {
                                 //console.log("status:"+cont.is_active);
-                                if (cont.is_active != null) {
-                                    io.to(cont.is_active).emit('status-red', { id: user._id });
-                                }
-                            })
-                    });
+                                //if (cont.is_active != null) {
+                                    chatroom.find({members: user._id})
+                                        .then(member => {
+                                            member.forEach(mem => {
+                                                io.to(mem._id).emit('status-red', { id: user._id});
+                                                console.log(mem._id, 'inside menbers');
+                                            })
+                                        })
+                                //}
+                            //})
+                    //});
                 }
             });
         connections.splice(connections.indexOf(socket), 1);

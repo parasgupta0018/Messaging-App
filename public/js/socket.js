@@ -24,6 +24,7 @@ socket.on('status',(id)=>{
     }    
 })
 socket.on('status-red',(id)=>{
+    console.log('red');
     var status = document.getElementsByClassName('status');
     for(var i=0; i<status.length;i++){
         var c_id = status[i].previousElementSibling.previousElementSibling.previousElementSibling;
