@@ -161,15 +161,10 @@ pre {
     color: #000;
 }
 
-
-/* label focus color */
-
 .input-field input:focus+label {
     color: green !important;
 }
 
-
-/* label underline focus color */
 
 .input-field input:focus {
     border-bottom: 1px solid green !important;
